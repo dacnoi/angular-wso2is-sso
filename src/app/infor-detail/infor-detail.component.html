@@ -1,3 +1,26 @@
 <p>
-  infor-detail works! : {{name}}
+{{message}}
 </p>
+<div *ngIf = "isLogin">
+  
+  <div class="card">
+    <div class="card-body">
+      <div class="form-group">
+        <label class="col-md-1">ID</label>
+        <label class="">{{dataObject.id}}</label>
+      </div>
+      <div class="form-group">
+        <label class="col-md-1">Name</label>
+        <label class="">{{dataObject.name[0].use}}</label>
+      </div>
+      <div class="form-group">
+        <label class="col-md-1">gender</label>
+        <label class="">{{dataObject.gender}}</label>
+      </div>
+      <div class="form-group">
+        <label class="col-md-1">BirthDate</label>
+        <label class="">{{dataObject.birthDate}}</label>
+      </div> 
+    </div>
+  </div>
+</div>

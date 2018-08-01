@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 // Import Http 
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 // Get data asynchronously with Observable
@@ -13,9 +13,12 @@ import { OAuthService } from 'angular2-oauth2';
   providedIn: 'root'
 })
 export class AppService {
-
+  public idtoken : string = '';
+  public tokenkey : string = '';
+  private actionUrl: string = 'http://localhost:3000/infor/';
   constructor(
-    private oAuthService : OAuthService
+    private oAuthService : OAuthService,
+    private http : HttpClient
   ) { 
     this.oAuthService.loginUrl = 'https://localhost:9445/oauth2/authorize'; // <== Authorization Endpoint URL
     this.oAuthService.redirectUri = 'http://localhost:4200/infordetail';
@@ -48,5 +51,19 @@ export class AppService {
     let claims = this.oAuthService.getIdentityClaims();
         if (!claims) return null;
         return claims.given_name; 
+  }
+  getIdToken() : string{
+    this.idtoken =  this.oAuthService.getIdToken();
+    return this.idtoken;
+  }
+  getToken() : string {
+    if(this.oAuthService.getAccessToken() === null){
+      return null;
+    }
+    return this.oAuthService.getAccessToken();
+  }
+  getInforFromRestApiNodeJs<T>(token : string) : Observable<T>{
+    console.log(this.actionUrl+token);
+    return this.http.get<T>(this.actionUrl+token);
   }
 }
