@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { OAuthService } from 'angular2-oauth2';
+import { OAuthService } from 'angular2-oauth2/oauth-service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +20,12 @@ export class AppService {
     private oAuthService : OAuthService,
     private http : HttpClient
   ) { 
-    this.oAuthService.loginUrl = 'https://localhost:9445/oauth2/authorize'; // <== Authorization Endpoint URL
+    this.oAuthService.loginUrl = 'https://10.14.166.4:9444/oauth2/authorize'; // <== Authorization Endpoint URL
     this.oAuthService.redirectUri = 'http://localhost:4200/infordetail';
-    this.oAuthService.clientId = 'wq08YMr_v7hnRQQ5xa31w2tXfdca';
+    this.oAuthService.clientId = '2iFnKfffHh_xBH110Nv4Bc0Yq7ka';
     this.oAuthService.scope = 'openid';
     this.oAuthService.oidc = true;
-    this.oAuthService.issuer = 'https://localhost:9445/oauth2/token'; // <== Token Endpoint URL
+    this.oAuthService.issuer = 'https://10.14.166.4:9444/oauth2/token'; // <== Tokexn Endpoint URL
     this.oAuthService.setStorage(sessionStorage);
     this.oAuthService.tryLogin({});
   }
@@ -64,6 +64,6 @@ export class AppService {
   }
   getInforFromRestApiNodeJs<T>(token : string) : Observable<T>{
     console.log(this.actionUrl+token);
-    return this.http.get<T>(this.actionUrl+token);
+    return;// this.http.get<T>(this.actionUrl+token);
   }
 }

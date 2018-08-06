@@ -26,7 +26,8 @@ export class InforDetailComponent implements OnInit {
                 console.log(this.dataObject.id);
               }else{
                 console.log(data);
-                this.message = "Login failed";
+                this.dataObject = data.data;
+                this.message = "Login failed! Token hết hạn";
               }
             } 
             ,error => () => {
