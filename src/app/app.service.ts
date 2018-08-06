@@ -64,6 +64,6 @@ export class AppService {
   }
   getInforFromRestApiNodeJs<T>(token : string) : Observable<T>{
     console.log(this.actionUrl+token);
-    return;// this.http.get<T>(this.actionUrl+token);
+    return this.http.get<T>(this.actionUrl+token);
   }
 }
